@@ -1,7 +1,7 @@
 {
   "name": "2022-cs-5356-milestone-1",
   "version": "1.0.0",
-  "description": "",
+  "description": "Refer to the assignment for most of the details of the project",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.js"
@@ -14,10 +14,20 @@
     "cookie-parser": "^1.4.6",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
+    "firebase": "^9.6.10",
     "firebase-admin": "^10.0.2",
     "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "cypress": "^9.3.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohit2mittal/2022-cs5356-milestone-1.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/mohit2mittal/2022-cs5356-milestone-1/issues"
+  },
+  "homepage": "https://github.com/mohit2mittal/2022-cs5356-milestone-1#readme"
 }
