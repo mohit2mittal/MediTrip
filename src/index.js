@@ -9,26 +9,13 @@ const port = process.env.PORT || 8080;
 // CS5356 TODO #2
 // Uncomment this next line after you've created
 // serviceAccountKey.json
-// const serviceAccount = require("./../config/serviceAccountKey.json");
+const serviceAccount = require("./../config/serviceAccountKey.json");
 const userFeed = require("./app/user-feed");
 const authMiddleware = require("./app/auth-middleware");
-import { initializeApp } from 'firebase/app';
-const firebaseConfig = {
-  apiKey: "AIzaSyAA1HcwJn-FKvyvBTiNGjgCN4OM6yKSF8U",
-  authDomain: "milestone-1--building-startup.firebaseapp.com",
-  projectId: "milestone-1--building-startup",
-  storageBucket: "milestone-1--building-startup.appspot.com",
-  messagingSenderId: "674934330368",
-  appId: "1:674934330368:web:c556e423c742f25c26f4e5"
-};
 
-// Initialize Firebase
-const firebaseapp = initializeApp(firebaseConfig);
-// CS5356 TODO #2
-// Uncomment this next block after you've created serviceAccountKey.json
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-// });
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  });
 
 // use cookies
 app.use(cookieParser());
