@@ -3,22 +3,44 @@
  
 <head>
   <%- include('../partials/head') %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+  <link rel="stylesheet" type="text/css" href="../css/landing.css">
     <!-- Include any custom css classes that you want available on this page here -->
     <style>
-
     </style>
 </head>
 
 <body>
+  
   <header>
     <%- include('../partials/nav') %>
   </header>
+  <body>
+    <section class="hero is-info is-fullheight">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <div class="column is-6 is-offset-3">
+                        <h1 class="title">
+                            Who let the dogs out!!
+                        </h1>
 
-  Fill me in!
-  <!-- CS5356 TODO #1 Add your landing page here -->
-
-</body>
-
+                        <h2 class="subtitle">
+                            $The best social media site for dogs. Share you dog pictures, meet other proud dog owers and much more!!
+                        </h2>
+                        <h1 class ="subtitle">
+                            Ready to git it a spin?
+                        </h1>
+                        <a href="/sign-up" class="button is-info is-large is-green" style="background-color:yellowgreen;">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <script async type="text/javascript" src="../js/bulma.js"></script>
 <%- include('../partials/footer') %>
 
 </html>
