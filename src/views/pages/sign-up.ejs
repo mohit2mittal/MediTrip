@@ -29,12 +29,18 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
 
 <script>
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
   window.onload = () => {
     console.log('Running onload')
     const firebaseConfig = {
       // CS5356 TODO #2
       // Copy your Firebase config here too
+  apiKey: "AIzaSyAA1HcwJn-FKvyvBTiNGjgCN4OM6yKSF8U",
+  authDomain: "milestone-1--building-startup.firebaseapp.com",
+  projectId: "milestone-1--building-startup",
+  storageBucket: "milestone-1--building-startup.appspot.com",
+  messagingSenderId: "674934330368",
+  appId: "1:674934330368:web:c556e423c742f25c26f4e5"
     };
 
     const app = firebase.initializeApp(firebaseConfig);
@@ -47,6 +53,20 @@
         event.preventDefault();
         const login = event.target.login.value;
         const password = event.target.password.value;
+
+        createUserWithEmailAndPassword(app.auth(), login, password)
+      .then((userCredential) => {
+        // Signed in 
+       const user = userCredential.user;
+    // ...
+       })
+    .catch((error) => {
+      const errorCode = error.code;
+     const errorMessage = error.message;
+      // ..
+  });
+       
+
 
         // CS5356 TODO #3
         // Create a new user using the Firebase SDK for Web
