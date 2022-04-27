@@ -20,7 +20,6 @@
           </p>
           <ul class="menu-list">
             <li><a>Feed</a></li>
-
           </ul>
         </aside>
       </div>
@@ -38,6 +37,11 @@
           <%- include('../partials/feed-stream', { feed: feed }) %>
         </div>
       </div>
+      <div class="column is-6">
+      <form action="/sessionLogout" style="height: 100%; width: 100%;" method="get">
+        <button style= "color: white; background-color: crimson; position:relative;left:56%;border-radius: 10%; width: 40x;height: 30px;">Log Out</button>
+      </div>
+      </form>
     </div>
   </div>
 

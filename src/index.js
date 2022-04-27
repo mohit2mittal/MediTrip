@@ -63,7 +63,6 @@ app.post("/sessionLogin", async (req, res) => {
       // Set cookie policy for session cookie.
       const options = { maxAge: expiresIn, httpOnly: true, secure: true };
       res.cookie('session', sessionCookie, options);
-      res.status(200).send('Login Successful');
       res.end(JSON.stringify({ status: 'success' }));
     },
     (error) => {
@@ -84,6 +83,13 @@ app.get("/sessionLogout", (req, res) => {
 
 app.post("/dog-messages", authMiddleware, async (req, res) => {
  
+  var dogMessage = req.body.message.toString();
+
+  var currentuser = req.user;
+
+  await userFeed.add(currentuser, dogMessage);
+
+  res.redirect("/dashboard");
   // CS5356 TODO #5
   // Get the message that was submitted from the request body
   // Get the user object from the request body
