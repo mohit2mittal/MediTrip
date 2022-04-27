@@ -16,8 +16,38 @@
   <header>
     <%- include('../partials/nav', { hideSignIn: true }) %>  
   </header>
+  <section class="hero is-fullheight">
+    <div class="hero-body has-text-centered">
+      <div class = "container" style="text-align:center" >
+      <div class="login">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_M-pcgz6W0KzGjvtTOKugBFbwY-9b4ynW-Q&usqp=CAU" width="100px" />
+        <form id="login-form">
+          <div class="field">
+            <div class="control">
+              <input class="input is-medium is-rounded" style="width: 20%;" type="email" name="login" placeholder="Your user name" autocomplete="username" required />
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <input class="input is-medium is-rounded" style="width: 20%;" type="password" name="password" placeholder="Password" autocomplete="current-password" required />
+            </div>
+          </div>
+          <br />
+          <button class="button is-primary is-medium is-rounded" style="width:10%;" type="submit">
+            Sign In
+          </button>
+          <div id="login-error">
 
-  <form id="login-form">
+          </div>
+        </form>
+        <br>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+  <!-- <form id="login-form">
     <input type="text" name="login" placeholder="Your user name" />
     <input type="password" name="password" id="password" />
     <button>
@@ -27,7 +57,7 @@
 
     </div>
     </div>
-  </form>
+  </form> -->
 </body>
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
@@ -37,16 +67,27 @@
  window.onload = () => {
     const firebaseConfig = {
       apiKey: "AIzaSyAA1HcwJn-FKvyvBTiNGjgCN4OM6yKSF8U",
-  authDomain: "milestone-1--building-startup.firebaseapp.com",
+    authDomain: "milestone-1--building-startup.firebaseapp.com",
   projectId: "milestone-1--building-startup",
   storageBucket: "milestone-1--building-startup.appspot.com",
   messagingSenderId: "674934330368",
   appId: "1:674934330368:web:c556e423c742f25c26f4e5"};
 
+  const postIdTokenToSessionLogin = async function (url, idTokenUser) {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idToken: idTokenUser }),
+      });
+      return response;
+    };
+
     const app = firebase.initializeApp(firebaseConfig);
 
     app.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
-
+      
     document
       .getElementById("login-form")
       .addEventListener("submit", (event) => {
@@ -54,28 +95,28 @@
         const login = event.target.login.value;
         const password = event.target.password.value;
 
-
-
-  app.auth().signInWithEmailAndPassword(auth, login, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
-
-        // CS5356 TODO #3
-        // Sign in using the Firebase SDK for Web
-        // Get the users ID token
-        // Start a new session with the users ID token
-        // Redirect the user to the /dashboard
-
-        return false;
-      });
-  };
+  app.auth().signInWithEmailAndPassword(login, password).catch((error) => {
+  var errorMessage = error.message;
+  console.log(error.code, error.message);
+  window.alert("Wrong username/password")
+}).then((userCredential) => {
+    var user = userCredential.user;
+      return user.getIdToken().then(idToken => {
+   // const csrfToken = getCookie('csrfToken')
+    return postIdTokenToSessionLogin('/sessionLogin', idToken);
+  }).catch((error) => {
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  console.log(error.code, error.message);
+});
+}).then(() => {
+ window.location.assign('/dashboard');
+}).catch((error) => {
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  console.log(error.code, error.message);
+})
+} )}          
 </script>
 
 </html>
