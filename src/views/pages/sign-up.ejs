@@ -161,19 +161,6 @@
   }
 
 </style>
-  <!-- <div class="container">
-    Sign Up for a new account or <a href="/sign-in">click here to sign in with an existing account</a>
-    <form id="login-form">
-      <label>Login</label>
-      <input id="login" type="text" name="login" />
-      <label>Password</label>
-      <input type="password" name="password" />
-      <button>Log in</button>
-    </form>
-    <div id="login-error" style="display: none;">
-    </div>
-    <a href="/dashboard">Dashboard</a>
-  </div> -->
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
@@ -194,6 +181,17 @@
   appId: "1:674934330368:web:c556e423c742f25c26f4e5"
     };
 
+    const postIdTokenToSessionLogin = async function (url, useridtoken) {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idToken: useridtoken }),
+      });
+      return response;
+    };
+
     const app = firebase.initializeApp(firebaseConfig);
 
     app.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
@@ -209,15 +207,14 @@
         // Signed in 
        var user = userCredential.user;
        return user.getIdToken().then(idToken => {
-    return postUserId('/sessionLogin', idToken);
-  });
+    return postIdTokenToSessionLogin('/sessionLogin', idToken);
+  }).then(() => {
+    window.location.assign("/dashboard");
+    });
 }).catch((error) => {
     console.log(error.code, error.message);
-    }).then(() => {
-  window.location.assign('/sign-in')
-}).catch((error) => {
-  console.log(error.code, error.message);
-  })
+    window.alert(error.message)
+ })
 })
        
         // CS5356 TODO #3

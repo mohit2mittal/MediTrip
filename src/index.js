@@ -5,9 +5,6 @@ const bodyParser = require("body-parser");
 const admin = require("firebase-admin");
 const app = express();
 const port = process.env.PORT || 8080;
-// CS5356 TODO #2
-// Uncomment this next line after you've created
-// serviceAccountKey.json
 const serviceAccount = require("./../config/serviceAccountKey.json");
 const userFeed = require("./app/user-feed");
 const authMiddleware = require("./app/auth-middleware");
@@ -37,11 +34,44 @@ app.get("/", function (req, res) {
 });
 
 app.get("/sign-in", function (req, res) {
-  res.render("pages/sign-in");
+  const sessionCookie = req.cookies.session || "";
+  if (sessionCookie === "") {
+    res.render("pages/sign-in");
+  } else {
+    admin
+      .auth()
+      .verifySessionCookie(sessionCookie, true /** checkRevoked */)
+      .then(userData => {
+        console.log("Logged in:", userData.email);
+        req.user = userData;
+        next();
+      })
+      .catch(error => {
+        res.redirect("/dashboard");
+      });
+  }
+  
 });
 
 app.get("/sign-up", function (req, res) {
-  res.render("pages/sign-up");
+  const sessionCookie = req.cookies.session || "";
+
+  if (sessionCookie === "") {
+    res.render("pages/sign-up");
+  } else {
+    admin
+      .auth()
+      .verifySessionCookie(sessionCookie, true /** checkRevoked */)
+      .then(userData => {
+        console.log("Logged in:", userData.email);
+        req.user = userData;
+        next();
+      })
+      .catch(error => {
+        res.redirect("/dashboard");
+      });
+  }
+  //res.render("pages/sign-up");
 });
 
 app.get("/dashboard", authMiddleware, async function (req, res) {
@@ -50,17 +80,10 @@ app.get("/dashboard", authMiddleware, async function (req, res) {
 });
 
 app.post("/sessionLogin", async (req, res) => {
-  const idToken = req.body.idToken.toString();
- // const csrfToken = req.body.csrfToken;
-  // Guard against CSRF attacks.
-  // if (csrfToken !== req.cookies.csrfToken) {
-  //   res.status(401).send('UNAUTHORIZED REQUEST!');
-  //   return;
-  // }
+  const idToken = req.body.idToken
   const expiresIn = 60 * 60 * 24 * 6 * 1000;
   admin.auth().createSessionCookie(idToken, { expiresIn }).then(
     (sessionCookie) => {
-      // Set cookie policy for session cookie.
       const options = { maxAge: expiresIn, httpOnly: true, secure: true };
       res.cookie('session', sessionCookie, options);
       res.end(JSON.stringify({ status: 'success' }));
@@ -70,12 +93,6 @@ app.post("/sessionLogin", async (req, res) => {
     }
     );
   });
-  // CS5356 TODO #4
-  // Get the ID token from the request body
-  // Create a session cookie using the Firebase Admin SDK
-  // Set that cookie with the name 'session'
-  // And then return a 200 status code instead of a 501
-  //res.status(501).send();
 app.get("/sessionLogout", (req, res) => {
   res.clearCookie("session");
   res.redirect("/sign-in");
@@ -90,10 +107,6 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   await userFeed.add(currentuser, dogMessage);
 
   res.redirect("/dashboard");
-  // CS5356 TODO #5
-  // Get the message that was submitted from the request body
-  // Get the user object from the request body
-  // Add the message to the userFeed so its associated with the user
 });
 
 app.listen(port);
