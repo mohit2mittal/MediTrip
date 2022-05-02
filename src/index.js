@@ -55,7 +55,6 @@ app.get("/sign-in", function (req, res) {
 
 app.get("/sign-up", function (req, res) {
   const sessionCookie = req.cookies.session || "";
-
   if (sessionCookie === "") {
     res.render("pages/sign-up");
   } else {

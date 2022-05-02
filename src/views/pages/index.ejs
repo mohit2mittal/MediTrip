@@ -3,15 +3,42 @@
  
 <head>
   <%- include('../partials/head') %>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-  <link rel="stylesheet" type="text/css" href="../css/landing.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- Include any custom css classes that you want available on this page here -->
     <style>
+         @media(max-width: 500px) {
+      .reverse-columns {
+        flex-direction: column-reverse;
+        display: flex;
+      }
+    }
+
+    .titled {
+      font-family: 'Merriweather', serif !important;
+      font-size: 58px !important;
+      font-weight: 400 !important;
+      line-height: 64px !important;
+    }
+
+    .subtitled {
+      font-family: 'Merriweather', serif !important;
+      font-size: 22px !important;
+      font-weight: 400 !important;
+      line-height: 36px !important;
+    }
+    #colored-dna-back {
+      background: url(../images/colored-dna.svg);
+      background-position: center;
+      background-size: cover;
+      background-color: #212931;
+    }
     </style>
 </head>
 
@@ -21,26 +48,175 @@
     <%- include('../partials/nav') %>
   </header>
   <body>
-    <section class="hero is-info is-fullheight">
-            <div class="hero-body">
-                <div class="container has-text-centered">
-                    <div class="column is-6 is-offset-3">
-                        <h1 class="title">
-                           Test Who let the dogs out!!
-                        </h1>
+     <!-- NavBar va a todo lo ancho -->
+  
+    
+    <!-- <div class="navbar-brand">
+      <a class="navbar-item" href="index.ejs">
+        <figure class="image" style="color:darkorange;">
+          <img class="is-rounded" src="https://bulma.io/images/placeholders/64x64.png" alt="MediTrip"> 
+         </figure>
+      </a>
+    </div> -->
+      <!-- <div class="navbar-menu">
+        
+        <div class="navbar-end">
+          <a class="navbar-item">
+            WHY?
+          </a>
+  
+          <a class="navbar-item">
+            BUY
+          </a>
+  
+          <a class="navbar-item">
+            ILLUSTRATION SERIES
+          </a>
+  
+          <a class="navbar-item">
+            EXCLUSIVE ILLUSTRATIONS
+          </a>
+  
+        </div>
+      </div> -->
+    
 
-                        <h2 class="subtitle">
-                            $The best social media site for dogs. Share you dog pictures, meet other proud dog owers and much more!!
-                        </h2>
-                        <h1 class ="subtitle">
-                            Ready to give it a spin?
-                        </h1>
-                        <a href="/sign-up" class="button is-info is-large is-green" style="background-color:yellowgreen; height: 50px;">Sign Up</a>
-                    </div>
-                </div>
-            </div>
-    </section>
-    <script async type="text/javascript" src="../js/bulma.js"></script>
+    
+  
+
+  <!-- Hero del producto -->
+  <section id="Landing Page top" class="hero is-white is-fullheight" style="background-color:aqua;background: url(../../../static/images/Medical-Tourism-Macroeconomic-Trends-1038x720.jpg) no-repeat center center fixed;
+  -moz-background-size: cover;
+  background-size: cover;">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns  is-8-widescreen reverse-columns">
+          <div class="column
+          is-10-mobile 
+          is-10-tablet 
+          is-5-desktop 
+          is-5-widescreen 
+          is-5-fullhd " data-aos="fade-down">
+            <h2 class="title is-white titled is-1 mb-4" style="color:black; font-style: italic;">
+              Worried about expensive medical bills?
+            </h2>
+              <!-- <br> You don't need to anymore! </br> -->
+              <p style="font-size: 20px;margin-bottom: 10px;">
+                Sign up today for get best medical care 
+                from anywhere in the world at cheapest price possible!!</p>
+            
+            <a href="/sign-up" class="button is-info is-large is-green" style="background-color:darkgreen; height: 50px;">Sign Up</a>
+          </div>
+          <div data-aos="fade-right" class="column
+          is-10-mobile 
+          is-10-tablet 
+          is-4-desktop 
+          is-7-widescreen 
+          is-4-fullhd is-offset-1-fullhd">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-white is-fullheight" style="background-color:#2A9F84;">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns  is-vcentered">
+          <div data-aos="fade-left" class="column
+           is-offset-1-mobile
+          is-offset-1-tablet
+         is-offset-1-desktop
+         is-offset-1-widescreen
+          is-offset-1-fullhd" style="margin-left: 0%;">
+            <figure class="image" style="width: 600px; height:auto;margin-left: 0;">
+              <img src="../../../static/images/Medical-tourism.jpg" alt="report-residents">
+            </figure>
+          </div>
+          <div data-aos="fade-down" class="column
+          is-10-mobile is-offset-1-mobile
+          is-10-tablet is-offset-1-tablet
+          is-5-desktop is-offset-1-desktop
+          is-5-widescreen is-offset-1-widescreen
+          is-5-fullhd is-offset-1-fullhd">
+            <h1 class="titled title is-1 mb-6">
+              Book an appointment anywhere in the world!!!
+            </h1>
+            <h2 class="subtitled subtitle">
+              Best and cheapest possible treatment just fingertips away!
+            </h2>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-white is-fullheight" style="background-color:#74B6C6;">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns  is-vcentered reverse-columns">
+          <div data-aos="fade-right" class="column
+          is-offset-1-mobile
+          is-offset-1-tablet
+          is-offset-1-desktop
+          is-offset-1-widescreen
+          is-offset-1-fullhd">
+            <h1 class="title titled is-1 mb-6">
+              Online consultation available
+            </h1>
+            <h2 class="subtitle subtitled">
+              Book your online consultaion in just under 2 minutes!
+              Get access to best doctors out there from your home.
+            </h2>
+          </div>
+          <div data-aos="fade-down" class="column
+          is-offset-1-mobile
+           is-offset-1-tablet
+          is-offset-1-desktop
+          is-offset-1-widescreen
+          is-offset-1-fullhd" data-aos="fade-up">
+            <figure class="image" style="width: 500px; height:auto;margin-right: 10%;">
+              <img src="../../../static/images/medical-consultation-online.jpg" style="width: auto;" alt="medical-translations">
+            </figure>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-medium has-text-centered" style="background-color:white;">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div data-aos="zoom-in-up" class="column is-8">
+            <h1 class="title titled is-1 mb-6" style="color: black;font-style: italic;">
+              MediTrip <span id="typewriter"></span>
+            </h1>
+            <h2 class="subtitle subtitled" style="color: black;">
+              A one stop solution to all your medical needs!
+            </h2>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+    <script async type="text/javascript" src="../js/bulma.js">
+        new Typewriter('#typewriter', {
+      strings: ['typewriter', 'Effect', 'typewriter.js', 'example'],
+      autoStart: true,
+      loop: true,
+    });
+  </script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true
+    });
+    </script>
 <%- include('../partials/footer') %>
 
 </html>
