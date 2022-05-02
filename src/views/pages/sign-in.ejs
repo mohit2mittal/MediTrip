@@ -2,49 +2,70 @@
 <html lang="en">
 <head>
   <%- include('../partials/head') %>
-  <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Neumorphic Login - Free Bulma template</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="../css/neumorphic-login.css">
-  
+  <head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
+    <style type="text/css">
+      body{
+      padding: 0;
+      margin: 0;
+      }
+      .hero{
+      height: 100vh;
+      position: relative;
+      }
+      .notification{
+      padding-top: 20px;
+      padding-bottom: 30px;
+      }
+      .button{
+      margin-top: 10px;
+      }
+    </style>
+  </head>
 </head>
 
 <body>
   <header>
     <%- include('../partials/nav', { hideSignIn: true }) %>  
   </header>
-  <section class="hero is-fullheight">
-    <div class="hero-body has-text-centered">
-      <div class = "container" style="text-align:center" >
-      <div class="login">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_M-pcgz6W0KzGjvtTOKugBFbwY-9b4ynW-Q&usqp=CAU" width="100px" />
-        <form id="login-form">
-          <div class="field">
-            <div class="control">
-              <input class="input is-medium is-rounded" style="width: 20%;" type="email" name="login" placeholder="Your user name" autocomplete="username" required />
+    <div class="hero is-primary">
+      <div class="hero-body">
+        <h1 class="title has-text-centered is-size-2"> MediTrip Log In</h1>
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <div class="notification is-light">
+              <div class="field">
+                <label class="label">Name</label>
+                <p class="control has-icons-left has-icons-right">
+                <form id="login-form">
+                  <input class="input" name="email" type="email" placeholder="Email">
+                  <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="field">
+                <label class="label">Password:</label>
+                <p class="control has-icons-left">
+                  <input class="input" name = "password" type="password" placeholder="Password">
+                  <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                  </span>
+                </p>
+              </form>
+              </div>
+              <a class="button is-info is-rounded is-outlined is-medium">Login</a>
             </div>
           </div>
-          <div class="field">
-            <div class="control">
-              <input class="input is-medium is-rounded" style="width: 20%;" type="password" name="password" placeholder="Password" autocomplete="current-password" required />
-            </div>
-          </div>
-          <br />
-          <button class="button is-primary is-medium is-rounded" style="width:10%;" type="submit">
-            Sign In
-          </button>
-          <div id="login-error">
-
-          </div>
-        </form>
-        <br>
+        </div>
       </div>
     </div>
-    </div>
-  </section>
+  
+
 </body>
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
