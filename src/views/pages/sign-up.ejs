@@ -22,13 +22,13 @@
       <div class="column is-8 is-offset-2 register">
         <div class="columns">
           <div class="column left">
-            <h1 class="title is-1">Welcome to RuffHouse</h1>
-            <h2 class="subtitle colored is-4">Are you a dog person?</h2>
-            <p>You are one just one sign up away from meeting new people and their lovely pets. Hurry and create your own account for free!</p>
+            <h1 class="title is-1">Welcome to MediTrip</h1>
+            <h2 class="subtitle colored is-4">Got tired of paying for expensive medical bills?</h2>
+            <p>You are one just one sign up away from access to world renowned doctors at cheapest price possible!!</p>
           </div>
           <div class="column right has-text-centered">
             <h2 class="title is-4">Sign Up for a new account <br> or <br> <a href="/sign-in"><small style="color: deepskyblue;">click here to sign in with an existing account</small></a></h2>
-            <p class="description">Share your lovely dog pics, meet new people and much more</p>
+            <p class="description">Find best doctors out there, get free consultations and much more!</p>
             <form id="login-form">
               <div class="field">
                 <div class="control">
@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class="column is-8 is-offset-2">
+      <!-- <div class="column is-8 is-offset-2">
         <br>
         <nav class="level">
           <div class="level-left">
@@ -75,7 +75,7 @@
             </small>
           </div>
         </nav>
-      </div>
+      </div> -->
     </div>
   </section>
 </body>
@@ -168,7 +168,9 @@
 
 <script>
 // import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+//const functions = require('firebase-functions');
   window.onload = () => {
+  //  functions.logger.log('Running onload')
     console.log('Running onload')
     const firebaseConfig = {
       // CS5356 TODO #2
@@ -213,6 +215,7 @@
     });
 }).catch((error) => {
     console.log(error.code, error.message);
+  //  functions.logger.log(error.code, error.message)
     window.alert(error.message)
  })
 })

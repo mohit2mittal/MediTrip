@@ -2,84 +2,63 @@
 <html lang="en">
 <head>
   <%- include('../partials/head') %>
-  <head>
-    <title>Login</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
-    <style type="text/css">
-      body{
-      padding: 0;
-      margin: 0;
-      }
-      .hero{
-      height: 100vh;
-      position: relative;
-      }
-      .notification{
-      padding-top: 20px;
-      padding-bottom: 30px;
-      }
-      .button{
-      margin-top: 10px;
-      }
-    </style>
-  </head>
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neumorphic Login - Free Bulma template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/neumorphic-login.css">
+  
 </head>
 
 <body>
   <header>
     <%- include('../partials/nav', { hideSignIn: true }) %>  
   </header>
-    <div class="hero is-primary">
-      <div class="hero-body">
-        <h1 class="title has-text-centered is-size-2"> MediTrip Log In</h1>
-        <div class="columns is-centered">
-          <div class="column is-half">
-            <div class="notification is-light">
-              <div class="field">
-                <label class="label">Name</label>
-                <p class="control has-icons-left has-icons-right">
-                <form id="login-form">
-                  <input class="input" name="email" type="email" placeholder="Email">
-                  <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
-                  </span>
-                </p>
-              </div>
-              <div class="field">
-                <label class="label">Password:</label>
-                <p class="control has-icons-left">
-                  <input class="input" name = "password" type="password" placeholder="Password">
-                  <span class="icon is-small is-left">
-                  <i class="fas fa-lock"></i>
-                  </span>
-                </p>
-              </form>
-              </div>
-              <a class="button is-info is-rounded is-outlined is-medium">Login</a>
+  <section class="hero is-fullheight">
+    <div class="hero-body has-text-centered">
+      <div class = "container" style="text-align:center" >
+      <div class="login">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_M-pcgz6W0KzGjvtTOKugBFbwY-9b4ynW-Q&usqp=CAU" width="100px" />
+        <form id="login-form">
+          <div class="field">
+            <div class="control">
+              <input class="input is-medium is-rounded" style="width: 20%;" type="email" name="login" placeholder="Your user name" autocomplete="username" required />
             </div>
           </div>
-        </div>
+          <div class="field">
+            <div class="control">
+              <input class="input is-medium is-rounded" style="width: 20%;" type="password" name="password" placeholder="Password" autocomplete="current-password" required />
+            </div>
+          </div>
+          <br />
+          <button class="button is-primary is-medium is-rounded" style="width:10%;" type="submit">
+            Sign In
+          </button>
+          <div id="login-error">
+
+          </div>
+        </form>
+        <br>
       </div>
     </div>
-  
-
+    </div>
+  </section>
 </body>
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
 
 <script>
-  
+ // const functions = require('firebase-functions');
  window.onload = () => {
     const firebaseConfig = {
-      apiKey: "AIzaSyAA1HcwJn-FKvyvBTiNGjgCN4OM6yKSF8U",
-    authDomain: "milestone-1--building-startup.firebaseapp.com",
-  projectId: "milestone-1--building-startup",
-  storageBucket: "milestone-1--building-startup.appspot.com",
-  messagingSenderId: "674934330368",
-  appId: "1:674934330368:web:c556e423c742f25c26f4e5"};
+      apiKey: "AIzaSyC2AmL-ElALSGbRy6_MMSFGKyiiVdkjfL4",
+  authDomain: "meditrip-5dc59.firebaseapp.com",
+  projectId: "meditrip-5dc59",
+  storageBucket: "meditrip-5dc59.appspot.com",
+  messagingSenderId: "716556610945",
+  appId: "1:716556610945:web:edd8dba8b3cfba5c714c80"};
 
   const postIdTokenToSessionLogin = async function (url, useridToken) {
       const response = await fetch(url, {
@@ -104,8 +83,9 @@
         const password = event.target.password.value;
   app.auth().signInWithEmailAndPassword(login, password).catch((error) => {
   var errorMessage = error.message;
-  console.log(error.code, error.message);
-  window.alert("Wrong username/password")
+ // functions.logger.log(error.code, error.message);
+   console.log(error.code, error.message);
+   window.alert("Wrong username/password")
 }).then((userCredential) => {
     var user = userCredential.user;
       return user.getIdToken().then(idToken => {
@@ -113,6 +93,7 @@
   }).catch((error) => {
   var errorCode = error.code;
   var errorMessage = error.message;
+ // functions.logger.log(error.code, error.message);
   console.log(error.code, error.message);
 });
 }).then(() => {
@@ -120,6 +101,7 @@
 }).catch((error) => {
   var errorCode = error.code;
   var errorMessage = error.message;
+//  functions.logger.log(error.code, error.message);
   console.log(error.code, error.message);
 })
 } )}          

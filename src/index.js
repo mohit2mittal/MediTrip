@@ -1,3 +1,4 @@
+const functions = require("firebase-functions");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -84,7 +85,7 @@ app.post("/sessionLogin", async (req, res) => {
   admin.auth().createSessionCookie(idToken, { expiresIn }).then(
     (sessionCookie) => {
       const options = { maxAge: expiresIn, httpOnly: true, secure: true };
-      res.cookie('session', sessionCookie, options);
+      res.cookie("__session", sessionCookie, options);
       res.end(JSON.stringify({ status: 'success' }));
     },
     (error) => {
@@ -108,5 +109,12 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   res.redirect("/dashboard");
 });
 
-app.listen(port);
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+exports.helloWorld = functions.https.onRequest(app);
+
+
+//app.listen(port);
 console.log("Server started at http://localhost:" + port);

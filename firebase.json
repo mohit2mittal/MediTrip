@@ -1,0 +1,25 @@
+{
+
+  "functions": {
+    "source": "./",
+    "runtime": "nodejs16"
+    },
+    
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [{
+      "source": "**",
+      "function": "helloWorld"
+      }]
+  },
+  "emulators": {
+    "hosting": {
+      "port": 8000
+    }
+  }
+}
