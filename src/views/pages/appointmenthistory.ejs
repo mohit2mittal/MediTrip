@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neumorphic Login - Free Bulma template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/neumorphic-login.css">
+  
+</head>
+<body>
+<table id="myTable" class="table table-borderless table-striped table-earning">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Apopintment Purpose</th>
+      </tr>
+    </thead>
+    <tbody id="AppointmentPage"></tbody>
+  </table>
+  <a href="/dashboard" class="button is-info is-green" style="background-color:darkgreen; height: 50px;">Go to Dashboard</a>
+  </body>
+  <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
+  <script>
+    var useremail= '<%=  user.email %>';
+
+    console.log("checking user email", useremail);
+
+      window.onload = () => {
+       const firebaseConfig = {
+      apiKey: "AIzaSyC2AmL-ElALSGbRy6_MMSFGKyiiVdkjfL4",
+  authDomain: "meditrip-5dc59.firebaseapp.com",
+  projectId: "meditrip-5dc59",
+  storageBucket: "meditrip-5dc59.appspot.com",
+  messagingSenderId: "716556610945",
+  appId: "1:716556610945:web:edd8dba8b3cfba5c714c80"};
+  const app = firebase.initializeApp(firebaseConfig);
+  app.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+  let finalResponse;
+  function loadTableData(item) {
+      const table = document.getElementById("AppointmentPage");
+      if(item.emailid == useremail)
+      {
+        let row = table.insertRow();
+        let firstname = row.insertCell(0);
+        firstname.innerHTML = item.firstname;
+
+        let lastname = row.insertCell(1);
+        lastname.innerHTML = item.lastname;
+
+        let emailid = row.insertCell(2);
+        emailid.innerHTML = item.emailid;
+
+        let appointmentpurpose = row.insertCell(3);
+        appointmentpurpose.innerHTML = item.appointmentpurpose;
+      }
+    }
+    const getappointmentdetails = async function (url, useremail) {
+    let response = await fetch(url);
+    response.json().then(resp => {
+    var appointmentdetails = Object.values(resp);
+    var jsonData = JSON.parse(JSON.stringify(appointmentdetails));
+
+    jsonData.forEach(element => {
+    loadTableData(element);
+    });
+    loadTableData([]);
+  
+      }, error => {
+        console.log(error);
+      });
+    };  
+  getappointmentdetails('/getappointmentdetails', "mohitmittal21.19992@gmail.com");
+}
+  </script>
+  

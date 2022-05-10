@@ -14,6 +14,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   });
 
+  const db = admin.firestore(); 
 // use cookies
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -76,8 +77,54 @@ app.get("/sign-up", function (req, res) {
 
 app.get("/dashboard", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
-  res.render("pages/dashboard", { user: req.user, feed });
+  res.render("pages/dashboard", { user: req.user });
 });
+
+app.get("/appointmenthistory", authMiddleware, async function (req, res) {
+  res.render("pages/appointmenthistory", { user: req.user });
+});
+
+app.get("/appointmentbooking", authMiddleware, async function (req, res) {
+  res.render("pages/appointmentbooking", { user: req.user });
+});
+
+app.post("/updatedatacollection", async (req, res) => {
+  const eventbody = req.body
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
+  const emailid = req.body.emailid;
+  const appointmentpurpose= req.body.appointmentpurpose;
+
+  const dataAdded = await db.collection('appointments').add({
+    firstname: firstname,
+    lastname: lastname,
+    emailid: emailid,
+    appointmentpurpose:appointmentpurpose,
+    userid:emailid
+  })
+
+  res.redirect("/appointmentbooking");
+  });
+
+  app.get("/getappointmentdetails", async (req, res) => {
+    console.log("getting user", req.user);
+   const snapshot = await db.collection('appointments').get();
+
+  const resp = {};
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+    snapshot.forEach(doc => {
+      resp[doc.id] = doc.data();
+    });
+    console.log("returning response", resp);
+     return res.send(resp);
+    });
+    
+    app.get("/submissionform", (req, res) => {
+      res.render("pages/submissionform", { user: req.user });
+    });
 
 app.post("/sessionLogin", async (req, res) => {
   const idToken = req.body.idToken

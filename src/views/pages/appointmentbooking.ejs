@@ -1,0 +1,212 @@
+<html lang="en">
+<head>
+<script type="text/javascript" src="https://github.com/rubyeffect/easy_fill/tree/master/lib/easy_fill-0.0.1.min.js"></script>
+  <title>Reach Me</title>
+  <link rel="stylesheet" type="text/css" href="appointment.css" />
+</head>
+
+<body>
+  <div id="container">
+    <!--This is a division tag for body container-->
+    <div id="body_header">
+      <!--This is a division tag for body header-->
+      <h1>Appointment Request Form</h1>
+      <p>Book your appointment with best doctors with ease!</p>
+
+    </div>
+    <form id = appointmentform method="post">
+      <fieldset>
+        <legend> Appointment details</legend>
+        <label for="firstnameLabel">First Name:</label>
+        <input type="text" id="firstnameId" name="firstname" placeholder=" (only first names)" required pattern="[a-zA-Z0-9]+">
+
+        <label for="lastnameLabel">Last Name*:</label>
+        <input type="text" id="lastnameId" name="lastname" placeholder="Last name" required>
+
+        <label for="emailidLabel">emailid</label>
+        <input type="text" id="emailid" placeholder="Email" name="emailid">
+
+        <label for="appointmentpurposeLabel">Appointment Purpose</label>
+        <select id="appointmentpurposeId" name="appointmentpurpose" aria-placeholder="Appointment Purpose" required >
+          <option value="Physician Consultation">Physician Consultation</option>
+          <option value="Cardiologist consultation">Cardiologist consultation</option>
+          <option value="Oncologist consultation">Oncologist consultation</option>
+          <option value="Pediatric Consultation">Pediatric Consultation</option>
+          <option value="Cosmetic Surgery">Cosmetic Surgery</option>
+          <option value="ENT treatment">ENT treatment</option>
+        </select>
+        <!-- <input type="text" id="appointmentpurposeId" name="appointmentpurpose" placeholder="Purpose"> -->
+
+
+      </fieldset>
+      <button class="button is-primary is-medium is-rounded" type="submit">Request For Appointment</button>
+    </form>
+  </div>
+</body>
+<style>body
+    {
+        background-color:#5fcf80;
+    }
+    #body_header
+    {
+    
+        width:auto;
+        margin:0px auto;
+        text-align:center;
+        font-size:25px;
+    }
+    form {
+      max-width: 300px;
+      margin: 10px auto;
+      padding: 10px 20px;
+      background: #f4f7f8;
+      border-radius: 8px;
+    }
+    
+    h1 {
+      margin: 0 0 30px 0;
+      text-align: center;
+    }
+    
+    input[type="text"],
+    input[type="password"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="email"],
+    input[type="number"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="time"],
+    input[type="url"],
+    textarea,
+    select {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      font-size: 16px;
+      height: auto;
+      margin: auto;
+      outline: 0;
+      padding: 8px;
+      width: 100%;
+      background-color: #e8eeef;
+      color: black;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+      margin-bottom: 30px;
+    }
+    
+    input[type="radio"],
+    input[type="checkbox"]
+    
+    {
+      margin: 0 4px 8px 0;
+    }
+    
+    select {
+      padding: 6px;
+      height: 32px;
+      border-radius: 2px;
+    }
+    
+    button {
+      padding: 19px 39px 18px 39px;
+      color: #FFF;
+      background-color: #4bc970;
+      font-size: 18px;
+      text-align: center;
+      font-style: normal;
+      border-radius: 5px;
+      width: 100%;
+      border: 1px solid #3ac162;
+      border-width: 1px 1px 3px;
+      box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+      margin-bottom: 10px;
+    }
+    
+    fieldset {
+      margin-bottom: 30px;
+      border: none;
+    }
+    
+    legend {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    label.light {
+      font-weight: 300;
+      display: inline;
+    }
+    
+    .number {
+      background-color: #5fcf80;
+      color: #fff;
+      height: 30px;
+      width: 30px;
+      display: inline-block;
+      font-size: 0.8em;
+      margin-right: 4px;
+      line-height: 30px;
+      text-align: center;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+      border-radius: 100%;
+    }
+    
+    
+    
+      form {
+        max-width: 480px;
+      }
+    
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
+<script>
+    // const functions = require('firebase-functions');
+    window.onload = () => {
+  const firebaseConfig = {
+  apiKey: "AIzaSyC2AmL-ElALSGbRy6_MMSFGKyiiVdkjfL4",
+  authDomain: "meditrip-5dc59.firebaseapp.com",
+  databaseURL: "https://meditrip-5dc59-default-rtdb.firebaseio.com",
+  projectId: "meditrip-5dc59",
+  storageBucket: "meditrip-5dc59.appspot.com",
+  messagingSenderId: "716556610945",
+  appId: "1:716556610945:web:edd8dba8b3cfba5c714c80"};
+
+  const postuservaluestocollection = async function (url, submitevent) {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstname: event.target.firstname.value, lastname: event.target.lastname.value, emailid: event.target.emailid.value, appointmentpurpose:event.target.appointmentpurpose.value}),
+      });
+      return response;
+    };
+
+  const app = firebase.initializeApp(firebaseConfig);
+   
+  app.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+  document
+         .getElementById("appointmentform")
+         .addEventListener("submit", (event) => {
+           event.preventDefault();
+           const firstname = event.target.firstname.value;
+           const lastname = event.target.lastname.value;
+           const emailid = event.target.emailid.value;
+           const appointmentpurpose = event.target.appointmentpurpose.value;
+           return postuservaluestocollection('/updatedatacollection', event).then(() => {
+  window.location.assign('/submissionform');
+}).catch((error) => {
+  console.log("caught error"); 
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  console.log(error.code, error.message);
+})
+} )}  
+   </script>
+</html>
